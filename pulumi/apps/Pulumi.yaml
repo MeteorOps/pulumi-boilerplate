@@ -1,0 +1,3 @@
+name: apps
+runtime: nodejs
+description: An environment to be deployed on top of the base infrastructure

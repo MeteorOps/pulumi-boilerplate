@@ -1,0 +1,4 @@
+config:
+  apps:baseEnv: dev
+  apps:baseOrg: mclzion
+  aws:region: us-east-1

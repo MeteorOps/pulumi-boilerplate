@@ -1,0 +1,3 @@
+name: base
+runtime: nodejs
+description: The base infrastructure on which apps environments can be deployed
