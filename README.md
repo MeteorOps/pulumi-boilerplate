@@ -6,15 +6,20 @@ A pulumi-based DevOps boilerplate for startup founders
 
 ## Rational
 Startups regret similar things as they scale up:
- - Created stuff manually, so it's hard to create new environments for any purpose
+ - Creating stuff manually, so it's hard to create new environments for any purpose
  - An environment deployment is costly and time-consuming, so giving up on deploying environments for testing purposes
  - For either of the reasons above, recovering from a recovering from production incidents is harder
 
 The result of the above is neglect, and a system that's hard to maintain and develop.
 
 ## Goals
+ - Minimize regret around DevOps-related decisions
  - Make it easy to spin-up a full environment with ["One-Click"](https://www.meteorops.com/blog/one-click-environment-the-ultimate-devops-goal)
  - Save costs and time by deploying multiple environments on the same "Base"
+
+ ## Implementation
+ - The `base` Pulumi Project provisions all of the resources that can be shared with multiple environments (e.g., VPC, EKS Cluster)
+ - The `apps` Pulumi Project deploys all of the env-specific resources on top of the `base` resources
 
 ## Tech Stack
  - Pulumi (Typescript): Provision & deploy with idempotent code maintainable by developers
@@ -22,6 +27,15 @@ The result of the above is neglect, and a system that's hard to maintain and dev
  - Kubernetes: Orchestrate workloads on a platform that will support your evolving needs
 
 # Prerequisites
+### Versions
+```
+awscli 1.32.43
+helm 3.14.1
+kubectl 1.29.2
+pulumi 3.106.0
+nvm 0.38.0
+node 21.6.2 (npm 10.2.4)
+```
 
 ### AWS
  - Create an AWS account
