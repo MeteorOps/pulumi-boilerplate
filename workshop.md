@@ -27,4 +27,4 @@ Flexibility and ease in deploying full environments from scratch and in customiz
 4. Create a new Pulumi stack for a fictive PullRequest named 'pr-123'
 5. Modify the code to support deploying PullRequest environments on top of the 'dev' base
 6. Calculate the time and cost saved per stack 
-7. Bonus: Set a TTL for the 'pr-xxx' apps environments 
+7. Bonus: Set a TTL for the 'pr-xxx' apps environments & calc the extra cost saved
