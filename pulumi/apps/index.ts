@@ -7,7 +7,7 @@ const stackName = pulumi.getStack();
 const pulumiConfig = new pulumi.Config();
 const baseEnv = pulumiConfig.get('baseEnv');
 const baseOrg = pulumiConfig.get('baseOrg');
-const env = `${baseOrg}-${stackName}`
+const env = `${stackName}`
 
 // Reference base stack outputs
 const envBaseStack = new pulumi.StackReference(`${baseOrg}/base/${baseEnv}`);

@@ -1,8 +1,6 @@
 # pulumi-boilerplate
 A pulumi-based DevOps boilerplate for startup founders
 
-IMPORTANT: This repo is currently used for a workshop. To use it in your company, set the value of the `env` variable in the code to just `stackName`.
-
 # Architecture
 ![MeteorOps Pulumi Boilerplate](https://media.licdn.com/dms/image/D4D22AQFxMkiD9ucemw/feedshare-shrink_2048_1536/0/1706096119175?e=1710979200&v=beta&t=CqaJl08Mq7aicJQnCkniAfX_4T8t9dVZebZaq_mvjTE)
 

@@ -5,7 +5,7 @@ import * as eks from "@pulumi/eks";
 const stackName = pulumi.getStack();
 const pulumiConfig = new pulumi.Config();
 const baseOrg = pulumiConfig.get('baseOrg');
-const env = `${baseOrg}-${stackName}`;
+const env = `${stackName}`;
 
 // Allocate a new VPC with the default settings
 const vpc = new awsx.ec2.Vpc(`${env}-vpc`);
