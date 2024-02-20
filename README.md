@@ -56,3 +56,14 @@ node 21.6.2 (npm 10.2.4)
  - Deploy an environment by running `./deploy.sh env-name`
 ### Destroy
  - Destroy an environment by running `./destroy.sh env-name`
+
+# Request Fixes, Features
+If you stumble a bug, or need a new feature, [open an issue here](https://github.com/MeteorOps/pulumi-boilerplate/issues).
+Please be as descriptive as you can with your request.
+
+# Contributing
+It's straight forward:
+1. Fork the repo
+2. Checkout to a branch
+3. Modify and test
+4. Open a Pull Request
