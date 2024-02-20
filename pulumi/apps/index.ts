@@ -7,6 +7,7 @@ const stackName = pulumi.getStack();
 const pulumiConfig = new pulumi.Config();
 const baseEnv = pulumiConfig.get('baseEnv');
 const baseOrg = pulumiConfig.get('baseOrg');
+const env = `${baseOrg}-${stackName}`
 
 // Reference base stack outputs
 const envBaseStack = new pulumi.StackReference(`${baseOrg}/base/${baseEnv}`);
@@ -19,28 +20,28 @@ const k8sProvider = new k8s.Provider(`${stackName}-k8sProvider`, {
 });
 
 // Deploy the apps environment
-const nsName = stackName;
-const envNamespace = new k8s.core.v1.Namespace(`${stackName}-envNamespace`,{
+const nsName = env;
+const envNamespace = new k8s.core.v1.Namespace(`${env}-envNamespace`,{
     metadata: {
         name: nsName,
     },
 }, { provider: k8sProvider });
 
 // Create an IAM role for the Fargate profile.
-const fargatePodExecutionRole = new aws.iam.Role(`${stackName}-apps-fargatePodExecutionRole`, {
+const fargatePodExecutionRole = new aws.iam.Role(`${env}-apps-fargatePodExecutionRole`, {
     assumeRolePolicy: aws.iam.assumeRolePolicyForPrincipal({
         Service: "eks-fargate-pods.amazonaws.com",
     }),
 });
 
 // Attach the necessary policies to the role.
-const podExecutionRolePolicyAttachment = new aws.iam.RolePolicyAttachment(`${stackName}-apps-fargatePodExecutionRolePolicyAttachment`, {
+const podExecutionRolePolicyAttachment = new aws.iam.RolePolicyAttachment(`${env}-apps-fargatePodExecutionRolePolicyAttachment`, {
     role: fargatePodExecutionRole,
     policyArn: "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy",
 });
 
 // Once the role is created, we can create a Fargate Profile.
-const fargateProfile = new aws.eks.FargateProfile(`${stackName}-apps-fargateProfile`, {
+const fargateProfile = new aws.eks.FargateProfile(`${env}-apps-fargateProfile`, {
     clusterName: clusterName,
     podExecutionRoleArn: fargatePodExecutionRole.arn,
     selectors: [{
@@ -50,7 +51,7 @@ const fargateProfile = new aws.eks.FargateProfile(`${stackName}-apps-fargateProf
 
 
 // Deploy the apps
-const nginxHelmRelease = new k8s.helm.v3.Release(`${stackName}-nginx`, {
+const nginxHelmRelease = new k8s.helm.v3.Release(`${env}-nginx`, {
     chart: "nginx",
     version: "15.10.3",
     repositoryOpts: {

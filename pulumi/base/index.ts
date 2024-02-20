@@ -3,12 +3,15 @@ import * as awsx from "@pulumi/awsx";
 import * as eks from "@pulumi/eks";
 
 const stackName = pulumi.getStack();
+const pulumiConfig = new pulumi.Config();
+const baseOrg = pulumiConfig.get('baseOrg');
+const env = `${baseOrg}-${stackName}`;
 
 // Allocate a new VPC with the default settings
-const vpc = new awsx.ec2.Vpc(`${stackName}-vpc`);
+const vpc = new awsx.ec2.Vpc(`${env}-vpc`);
 
-const eksCluster = new eks.Cluster(`${stackName}-eksCluster`, {
-    name: `${stackName}-eksCluster`,
+const eksCluster = new eks.Cluster(`${env}-eksCluster`, {
+    name: `${env}-eksCluster`,
     vpcId: vpc.vpcId,
     publicSubnetIds: vpc.publicSubnetIds,
     privateSubnetIds: vpc.privateSubnetIds,
