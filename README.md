@@ -1,6 +1,8 @@
 # pulumi-boilerplate
 A pulumi-based DevOps boilerplate for startup founders
 
+NOTE: This repository is an alpha version of this project, and is expected to go through design and implementation changes as it evolves to support community use-cases.
+
 # Architecture
 ![MeteorOps Pulumi Boilerplate](https://media.licdn.com/dms/image/D4D22AQFxMkiD9ucemw/feedshare-shrink_2048_1536/0/1706096119175?e=1710979200&v=beta&t=CqaJl08Mq7aicJQnCkniAfX_4T8t9dVZebZaq_mvjTE)
 
@@ -59,6 +61,20 @@ node 21.6.2 (npm 10.2.4)
 ### Destroy
  - Destroy an apps environment by running `./destroy.sh <apps-env-name>`
  - Destroy a base environment by running `pulumi destroy -C pulumi/base <base-env-name>`
+### Examples
+```
+# Deploy the full DEV environment (base + apps)
+./deploy.sh dev dev
+
+# Deploy a PR environment
+./deploy.sh dev pr-123
+
+# Destroy the PR environment
+./destroy.sh dev pr-123
+
+# Destroy the DEV base environment
+pulumi destroy -C pulumi/base dev
+```
 
 # Request Fixes, Features
 If you stumble a bug, or need a new feature, [open an issue here](https://github.com/MeteorOps/pulumi-boilerplate/issues).
