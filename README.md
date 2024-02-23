@@ -88,8 +88,19 @@ It's straight forward:
 4. Open a Pull Request
 
 # TODO
- - [] Input validation for an environment
- - [] Support secrets
-
+ - [] Input validation in deploy/destroy scripts
+ - [] Support Pulumi secrets on PR envs
+ - [] Create a reusable app Helm chart
+ - [] Deploy Prometheus + Grafana
+ - [] Manage deployments with ArgoCD
+ - [] Support NodeGroups with Spot Instances
+ - [] Support NodeGroups with On-Demand Instances
+ - [] Support using External-Secrets
+ - [] Support adding a RDS to base stacks
+ - [] Support NginX ingresses
+ - [] Add Karpenter
+ - [] Add HPA/VPA
+ - [] Support IAM Roles for K8s workloads
+ - [] Refactor components into Pulumi components
  # Commercial Support
  If you're thinking about implementing this boilerplate for your startup and wish to get assistance, [schedule a consultation with us on our website](https://meteorops.com/technologies/pulumi).
