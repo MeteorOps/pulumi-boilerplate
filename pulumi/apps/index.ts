@@ -13,6 +13,7 @@ const env = `${stackName}`
 const envBaseStack = new pulumi.StackReference(`${baseOrg}/base/${baseEnv}`);
 const clusterName = envBaseStack.getOutput("eksClusterName");
 const kubeconfig = envBaseStack.getOutput("kubeconfig");
+const privateSubnetIds = envBaseStack.getOutput("privateSubnetIds");
 
 // Setup Kubernetes access
 const k8sProvider = new k8s.Provider(`${stackName}-k8sProvider`, {
@@ -47,6 +48,7 @@ const fargateProfile = new aws.eks.FargateProfile(`${env}-apps-fargateProfile`, 
     selectors: [{
         namespace: `${nsName}`,
     }],
+    subnetIds: privateSubnetIds,
 }, { dependsOn: [podExecutionRolePolicyAttachment] });
 
 
