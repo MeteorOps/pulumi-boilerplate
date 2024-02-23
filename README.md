@@ -53,9 +53,10 @@ node 21.6.2 (npm 10.2.4)
 
 # Usage
 ### Deploy
- - Deploy an environment by running `./deploy.sh env-name`
+ - Deploy an environment by running `./deploy.sh <base-env-name> <apps-env-name>`
 ### Destroy
- - Destroy an environment by running `./destroy.sh env-name`
+ - Destroy an apps environment by running `./destroy.sh <apps-env-name>`
+ - Destroy a base environment by running `pulumi destroy -C pulumi/base <base-env-name>`
 
 # Request Fixes, Features
 If you stumble a bug, or need a new feature, [open an issue here](https://github.com/MeteorOps/pulumi-boilerplate/issues).
@@ -67,3 +68,10 @@ It's straight forward:
 2. Checkout to a branch
 3. Modify and test
 4. Open a Pull Request
+
+# TODO
+ - [] Input validation for an environment
+ - [] Support secrets
+
+ # Commercial Support
+ If you're thinking about implementing this boilerplate for your startup and wish to get assistance, [schedule a consultation with us on our website](https://meteorops.com/technologies/pulumi).
