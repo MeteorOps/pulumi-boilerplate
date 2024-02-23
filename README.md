@@ -44,6 +44,8 @@ node 21.6.2 (npm 10.2.4)
 
 ### Pulumi
  - Create a Pulumi account
+ - Create a Pulumi Organization
+ - Replace the string "meteorops" with your organization's name in the `deploy.sh` and `pulumi/apps/Pulumi.dev.yaml` files
  - Install the Pulumi CLI
  - Run `pulumi login` into your Pulumi account
  

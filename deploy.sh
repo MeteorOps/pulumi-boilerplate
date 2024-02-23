@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
 BASE_ENV=$1
 APPS_ENV=$2
-PULUMI_USER=$(pulumi whoami)
+PULUMI_ORG="meteorops"
 
-echo here
-# Create a stack for Pull-Requests
-if [[ "${APPS_ENV}" =~ "^pr-[0-9]+$" ]]; then
-    echo here1
-    if [[ ! $(pulumi stack ls "${APPS_ENV}") ]]; then
-    echo here2
-        pulumi stack init -s "${APPS_ENV}" --copy-config-from 
+echo "NOTE: Deploying ${APPS_ENV} apps on top of ${BASE_ENV} base"
+
+pulumi org set-default $PULUMI_ORG
+pulumi stack init -C "pulumi/base" -s "${PULUMI_ORG}/${BASE_ENV}"
+pulumi stack init -C "pulumi/apps" -s "${PULUMI_ORG}/${APPS_ENV}"
+
+# Create a stack config for Pull-Requests
+if [[ "${APPS_ENV}" =~ ^pr-[0-9]+$ ]]; then
+    if [[ ! $(pulumi stack ls -o ${PULUMI_ORG} -C "pulumi/apps" | grep "${APPS_ENV}") ]]; then
+        pulumi config cp -C "pulumi/apps" -s "${PULUMI_ORG}/dev" -d "${APPS_ENV}"
     fi
 fi
-echo here3
-# Provide the 'apps' stack the Pulumi account
-pulumi config set baseOrg "${PULUMI_USER}" -C "pulumi/apps" -s "${APPS_ENV}"
-echo here4
+
 # Deploy the 'base' and 'apps' stacks
 npm i --prefix "pulumi/base" && \
     pulumi up -C "pulumi/base" -s "${BASE_ENV}" && \
     npm i --prefix "pulumi/apps" && \
     pulumi up -C "pulumi/apps" -s "${APPS_ENV}"
 
-# 
+# Set K8s cluster creds locally
 aws eks update-kubeconfig \
     --region us-east-1 \
     --name "${BASE_ENV}-eksCluster" && \

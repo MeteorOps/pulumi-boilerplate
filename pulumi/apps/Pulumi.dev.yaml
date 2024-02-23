@@ -1,3 +1,4 @@
 config:
   apps:baseEnv: dev
+  apps:baseOrg: meteorops # NOTE: Replace with your Pulumi Org name
   aws:region: us-east-1
