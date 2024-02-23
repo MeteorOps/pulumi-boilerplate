@@ -3,3 +3,6 @@ node_modules/
 
 # Optional npm cache directory
 .npm
+
+# Pull Request Pulumi stack configs
+Pulumi.pr-[0-9]*.yaml
