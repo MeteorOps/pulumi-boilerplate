@@ -60,7 +60,7 @@ node 21.6.2 (npm 10.2.4)
  - Deploy an environment by running `./deploy.sh <base-env-name> <apps-env-name>`
 ### Destroy
  - Destroy an apps environment by running `./destroy.sh <apps-env-name>`
- - Destroy a base environment by running `pulumi destroy -C pulumi/base <base-env-name>`
+ - Destroy a base environment by running `pulumi destroy -C pulumi/base -s <base-env-name> --refresh`
 ### Examples
 ```
 # Deploy the full DEV environment (base + apps)
@@ -70,10 +70,10 @@ node 21.6.2 (npm 10.2.4)
 ./deploy.sh dev pr-123
 
 # Destroy the PR environment
-./destroy.sh dev pr-123
+./destroy.sh pr-123
 
 # Destroy the DEV base environment
-pulumi destroy -C pulumi/base dev
+pulumi destroy -C pulumi/base dev --refresh
 ```
 
 # Request Fixes, Features
