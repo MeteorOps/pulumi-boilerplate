@@ -9,11 +9,10 @@ pulumi org set-default $PULUMI_ORG
 pulumi stack init -C "pulumi/base" -s "${PULUMI_ORG}/${BASE_ENV}"
 pulumi stack init -C "pulumi/apps" -s "${PULUMI_ORG}/${APPS_ENV}"
 
-# Create a stack config for Pull-Requests
+# Create a stack config for a Pull-Request environment
 if [[ "${APPS_ENV}" =~ ^pr-[0-9]+$ ]]; then
-    if [[ ! $(pulumi stack ls -o ${PULUMI_ORG} -C "pulumi/apps" | grep "${APPS_ENV}") ]]; then
-        pulumi config cp -C "pulumi/apps" -s "${PULUMI_ORG}/dev" -d "${APPS_ENV}"
-    fi
+    pulumi config cp -C "pulumi/apps" -s "${PULUMI_ORG}/dev" -d "${APPS_ENV}"
+    pulumi stack tag set ttl 360 -C "pulumi/apps" -s "${PULUMI_ORG}/${APPS_ENV}" 
 fi
 
 # Deploy the 'base' and 'apps' stacks
